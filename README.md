@@ -27,7 +27,7 @@ _Application Description_
 ```
 src/
 ├─ consts/
-│  ├─ enviroment.ts
+│  ├─ environment.ts
 │  ├─ userFriendlyMessages.ts
 ├─ controllers/
 │  ├─ ExampleController.ts

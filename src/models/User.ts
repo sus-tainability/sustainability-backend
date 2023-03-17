@@ -1,6 +1,6 @@
 import {Model, DataTypes, Optional, Sequelize} from 'sequelize';
 import bcrypt from 'bcrypt';
-import enviroment from '../consts/enviroment';
+import environment from '../consts/environment';
 import userFriendlyMessages from '../consts/userFriendlyMessages';
 // import {Models} from '../types';
 
@@ -54,7 +54,7 @@ class User
   };
 
   public static passwordHasher = async (password: string) => {
-    const salt = await bcrypt.genSalt(enviroment.saltRounds);
+    const salt = await bcrypt.genSalt(environment.saltRounds);
     return await bcrypt.hash(password, salt);
   };
 
