@@ -4,20 +4,11 @@ import environment from '../consts/environment';
 import userFriendlyMessages from '../consts/userFriendlyMessages';
 // import {Models} from '../types';
 
-export type Role = 'Student' | 'Teacher' | 'Admin';
-
 // These are all the attributes in the User model
 export interface UserAttributes {
   id: number;
   email: string;
   password: string;
-}
-
-// Attributes for parsing CSV when doing bulk sign up
-export interface BulkSignUpAttributes {
-  email: string;
-  role: Role;
-  class?: number;
 }
 
 // Payload Interface for the JWT Token
