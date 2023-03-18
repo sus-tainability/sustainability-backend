@@ -12,7 +12,13 @@ module.exports = {
   up: async queryInterface => {
     return await queryInterface.bulkInsert('users', [
       {
-        email: 'admin@example.com',
+        email: 'user1@example.com',
+        password: hashPassword('asdasd'),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        email: 'user2@example.com',
         password: hashPassword('asdasd'),
         createdAt: new Date(),
         updatedAt: new Date(),
