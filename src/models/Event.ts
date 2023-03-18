@@ -6,7 +6,7 @@ export interface EventAttributes {
   name: string;
   description: string;
   carbonSave: number;
-  endDate: string;
+  eventDuration: number;
   reward: number;
   requiredAssets: number;
   imageUrl: string;
@@ -22,7 +22,7 @@ class Event
   public name!: string;
   public description!: string;
   public carbonSave!: number;
-  public endDate!: string;
+  public eventDuration!: number;
   public reward!: number;
   public requiredAssets!: number;
   public imageUrl!: string;
@@ -58,8 +58,8 @@ class Event
           type: DataTypes.INTEGER.UNSIGNED,
           allowNull: false,
         },
-        endDate: {
-          type: new DataTypes.STRING(128),
+        eventDuration: {
+          type: DataTypes.INTEGER.UNSIGNED,
           allowNull: false,
         },
         reward: {
