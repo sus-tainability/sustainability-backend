@@ -1,5 +1,5 @@
 import {Model, DataTypes, Sequelize} from 'sequelize';
-// import {Models} from '../types';
+import {Models} from '../types';
 
 export interface PartOfAttributes {
   eventOneId: number;
@@ -73,7 +73,21 @@ class PartOf
   }
 
   // Use this method to create foreign key restraints
-  // public static associate(models: Models) {}
+  public static associate(models: Models) {
+    // define association here
+    PartOf.belongsTo(models.Event, {
+      foreignKey: 'eventOneId',
+      as: 'eventOne',
+    });
+    PartOf.belongsTo(models.Event, {
+      foreignKey: 'eventTwoId',
+      as: 'eventTwo',
+    });
+    PartOf.belongsTo(models.Story, {
+      foreignKey: 'storyId',
+      as: 'story',
+    });
+  }
 }
 
 export default PartOf;

@@ -1,5 +1,5 @@
 import {Model, DataTypes, Optional, Sequelize} from 'sequelize';
-// import {Models} from '../types';
+import {Models} from '../types';
 
 export interface AssetAttributes {
   id: number;
@@ -47,7 +47,25 @@ class Asset
   }
 
   // Use this method to create foreign key restraints
-  // public static associate(models: Models) {}
+  public static associate(models: Models) {
+    Asset.belongsTo(models.Attempt, {
+      foreignKey: {
+        name: 'attemptId',
+        allowNull: false,
+      },
+      targetKey: 'attemptId',
+      as: 'attempts',
+    });
+    Asset.hasOne(models.Image, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'id',
+        allowNull: false,
+      },
+      sourceKey: 'id',
+      as: 'images',
+    });
+  }
 }
 
 export default Asset;

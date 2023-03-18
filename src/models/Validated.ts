@@ -1,5 +1,5 @@
 import {Model, DataTypes, Optional, Sequelize} from 'sequelize';
-// import {Models} from '../types';
+import {Models} from '../types';
 
 export interface ValidatedAttributes {
   id: number;
@@ -53,7 +53,16 @@ class Validated
   }
 
   // Use this method to create foreign key restraints
-  // public static associate(models: Models) {}
+  public static associate(models: Models) {
+    Validated.belongsTo(models.Image, {
+      foreignKey: 'imageId',
+      as: 'image',
+    });
+    Validated.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'user',
+    });
+  }
 }
 
 export default Validated;

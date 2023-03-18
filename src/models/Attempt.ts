@@ -1,20 +1,23 @@
 import {Model, DataTypes, Optional, Sequelize} from 'sequelize';
-// import {Models} from '../types';
+import {Models} from '../types';
 
 export interface AttemptAttributes {
-  id: number;
+  attemptId: number;
   eventId: number;
   userId: number;
   startDate: string;
 }
 
-export type AttemptCreationAttributes = Optional<AttemptAttributes, 'id'>;
+export type AttemptCreationAttributes = Optional<
+  AttemptAttributes,
+  'attemptId'
+>;
 
 class Attempt
   extends Model<AttemptAttributes, AttemptCreationAttributes>
   implements AttemptAttributes
 {
-  public id!: number; // Note that the `null assertion` `!` is required in strict mode.
+  public attemptId!: number; // Note that the `null assertion` `!` is required in strict mode.
   public eventId!: number;
   public userId!: number;
   public startDate!: string;
@@ -33,7 +36,7 @@ class Attempt
   public static initModel(sequelize: Sequelize) {
     Attempt.init(
       {
-        id: {
+        attemptId: {
           type: DataTypes.INTEGER.UNSIGNED,
           autoIncrement: true,
           allowNull: false,
@@ -62,7 +65,33 @@ class Attempt
   }
 
   // Use this method to create foreign key restraints
-  // public static associate(models: Models) {}
+  public static associate(models: Models) {
+    Attempt.belongsTo(models.User, {
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+      targetKey: 'id',
+      as: 'users',
+    });
+    Attempt.belongsTo(models.Event, {
+      foreignKey: {
+        name: 'eventId',
+        allowNull: false,
+      },
+      targetKey: 'id',
+      as: 'events',
+    });
+    Attempt.hasMany(models.Asset, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'attemptId',
+        allowNull: false,
+      },
+      sourceKey: 'attemptId',
+      as: 'assets',
+    });
+  }
 }
 
 export default Attempt;

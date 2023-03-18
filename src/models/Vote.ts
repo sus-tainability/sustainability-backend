@@ -1,19 +1,17 @@
-import {Model, DataTypes, Optional, Sequelize} from 'sequelize';
-// import {Models} from '../types';
+import {Model, DataTypes, Sequelize} from 'sequelize';
+import {Models} from '../types';
 
 export interface VoteAttributes {
-  id: number;
   eventId: number;
   userId: number;
 }
 
-export type VoteCreationAttributes = Optional<VoteAttributes, 'id'>;
+export type VoteCreationAttributes = VoteAttributes;
 
 class Vote
   extends Model<VoteAttributes, VoteCreationAttributes>
   implements VoteAttributes
 {
-  public id!: number; // Note that the `null assertion` `!` is required in strict mode.
   public eventId!: number;
   public userId!: number;
 
@@ -31,18 +29,15 @@ class Vote
   public static initModel(sequelize: Sequelize) {
     Vote.init(
       {
-        id: {
-          type: DataTypes.INTEGER.UNSIGNED,
-          autoIncrement: true,
-          primaryKey: true,
-        },
         eventId: {
           type: DataTypes.INTEGER.UNSIGNED,
           allowNull: false,
+          primaryKey: true,
         },
         userId: {
           type: DataTypes.INTEGER.UNSIGNED,
           allowNull: false,
+          primaryKey: true,
         },
       },
       {
@@ -53,7 +48,16 @@ class Vote
   }
 
   // Use this method to create foreign key restraints
-  // public static associate(models: Models) {}
+  public static associate(models: Models) {
+    Vote.belongsTo(models.Event, {
+      foreignKey: 'eventId',
+      targetKey: 'id',
+    });
+    Vote.belongsTo(models.User, {
+      foreignKey: 'userId',
+      targetKey: 'id',
+    });
+  }
 }
 
 export default Vote;

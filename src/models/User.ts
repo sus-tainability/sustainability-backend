@@ -2,7 +2,7 @@ import {Model, DataTypes, Optional, Sequelize} from 'sequelize';
 import bcrypt from 'bcrypt';
 import environment from '../consts/environment';
 import userFriendlyMessages from '../consts/userFriendlyMessages';
-// import {Models} from '../types';
+import {Models} from '../types';
 
 // These are all the attributes in the User model
 export interface UserAttributes {
@@ -133,7 +133,40 @@ class User
   }
 
   // Use this method to create foreign key restraints
-  // public static associate(models: Models) {}
+  public static associate(models: Models) {
+    User.hasMany(models.Attempt, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+      as: 'attempts',
+    });
+    User.hasMany(models.Rejected, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+      as: 'rejected',
+    });
+    User.hasMany(models.Validated, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+      as: 'validated',
+    });
+    User.hasMany(models.Vote, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+      as: 'votes',
+    });
+  }
 }
 
 export default User;

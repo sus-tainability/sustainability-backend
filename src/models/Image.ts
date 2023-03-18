@@ -1,5 +1,5 @@
 import {Model, DataTypes, Optional, Sequelize} from 'sequelize';
-// import {Models} from '../types';
+import {Models} from '../types';
 
 export interface ImageAttributes {
   id: number;
@@ -33,7 +33,6 @@ class Image
       {
         id: {
           type: DataTypes.INTEGER.UNSIGNED,
-          autoIncrement: true,
           primaryKey: true,
         },
         requiredTotal: {
@@ -53,7 +52,34 @@ class Image
   }
 
   // Use this method to create foreign key restraints
-  // public static associate(models: Models) {}
+  public static associate(models: Models) {
+    Image.belongsTo(models.Asset, {
+      foreignKey: {
+        name: 'id',
+        allowNull: false,
+      },
+      targetKey: 'id',
+      as: 'assets',
+    });
+    Image.hasMany(models.Rejected, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'imageId',
+        allowNull: false,
+      },
+      sourceKey: 'id',
+      as: 'rejected',
+    });
+    Image.hasMany(models.Validated, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'imageId',
+        allowNull: false,
+      },
+      sourceKey: 'id',
+      as: 'validated',
+    });
+  }
 }
 
 export default Image;

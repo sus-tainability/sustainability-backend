@@ -1,5 +1,5 @@
 import {Model, DataTypes, Optional, Sequelize} from 'sequelize';
-// import {Models} from '../types';
+import {Models} from '../types';
 
 export interface EventAttributes {
   id: number;
@@ -83,7 +83,38 @@ class Event
   }
 
   // Use this method to create foreign key restraints
-  // public static associate(models: Models) {}
+  public static associate(models: Models) {
+    Event.hasMany(models.Attempt, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'eventId',
+        allowNull: false,
+      },
+      as: 'attempts',
+    });
+    Event.hasMany(models.Vote, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'eventId',
+        allowNull: false,
+      },
+      as: 'votes',
+    });
+    Event.hasMany(models.PartOf, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'eventOneId',
+        allowNull: false,
+      },
+    });
+    Event.hasMany(models.PartOf, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'eventTwoId',
+        allowNull: false,
+      },
+    });
+  }
 }
 
 export default Event;

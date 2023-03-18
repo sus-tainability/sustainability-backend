@@ -1,5 +1,5 @@
 import {Model, DataTypes, Optional, Sequelize} from 'sequelize';
-// import {Models} from '../types';
+import {Models} from '../types';
 
 export interface StoryAttributes {
   id: number;
@@ -35,7 +35,7 @@ class Story
           type: DataTypes.INTEGER.UNSIGNED,
           autoIncrement: true,
           allowNull: false,
-          unique: true,
+          primaryKey: true,
         },
         name: {
           type: new DataTypes.STRING(128),
@@ -54,7 +54,16 @@ class Story
   }
 
   // Use this method to create foreign key restraints
-  // public static associate(models: Models) {}
+  public static associate(models: Models) {
+    Story.hasMany(models.PartOf, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'storyId',
+        allowNull: false,
+      },
+      as: 'partOf',
+    });
+  }
 }
 
 export default Story;
