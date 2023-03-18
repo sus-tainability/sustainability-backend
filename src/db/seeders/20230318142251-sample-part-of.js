@@ -11,6 +11,8 @@ module.exports = {
         name: 'Choose Event 1 or 2',
         description: 'This is an Event Choosing Description',
         startDate: '2021-03-18T14:22:51.000Z',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         eventOneId: 3,
@@ -19,6 +21,8 @@ module.exports = {
         name: 'Choose Event 3 or 4',
         description: 'This is an Event Choosing Description',
         startDate: '2021-03-25T14:22:51.000Z',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         eventOneId: 5,
@@ -27,6 +31,8 @@ module.exports = {
         name: 'Choose Event 5 or 6',
         description: 'This is an Event Choosing Description',
         startDate: '2021-04-01T14:22:51.000Z',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },

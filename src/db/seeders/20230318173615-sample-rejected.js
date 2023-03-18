@@ -3,10 +3,10 @@
 
 module.exports = {
   up: async queryInterface => {
-    return await queryInterface.bulkInsert('stories', [
+    return await queryInterface.bulkInsert('rejections', [
       {
-        name: 'Story 1',
-        description: 'Story 1 description',
+        imageId: 1,
+        userId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -14,6 +14,6 @@ module.exports = {
   },
 
   down: async queryInterface => {
-    return await queryInterface.bulkDelete('stories', null, {});
+    return await queryInterface.bulkDelete('rejections', null, {});
   },
 };
