@@ -9,6 +9,11 @@ export default () => {
     Container.getInstance().get('AuthenticationController');
 
   authenticationRouter.post(
+    '/signin',
+    authenticationController.signIn.bind(authenticationController)
+  );
+
+  authenticationRouter.post(
     '/login/oauth2/google',
     authenticationController.googleAuth.bind(authenticationController)
   );

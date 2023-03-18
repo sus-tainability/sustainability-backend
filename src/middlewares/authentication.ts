@@ -18,7 +18,8 @@ export default class AuthenticationMiddleware {
     changePassword = false,
     showPassword = false
   ) {
-    const authToken = req.headers['x-auth-token'] as string;
+    const bearerToken = req.headers['authorization'] as string;
+    const authToken = bearerToken?.split(' ')[1];
     try {
       if (!authToken) {
         return res

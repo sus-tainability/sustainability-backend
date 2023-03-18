@@ -22,6 +22,41 @@ export default class AuthenticationController {
     this.userService = userService;
   }
 
+  async signIn(req: Request, res: Response, next: NextFunction) {
+    try {
+      const {password} = req.body;
+      const email = req.body.email.toLowerCase();
+      const user = await this.userService.getOneUserByEmail(email, true);
+
+      if (!user) {
+        res.status(401);
+        res.json({message: userFriendlyMessage.failure.emailNotExist});
+        return;
+      }
+      if (!(await user.isPasswordMatch(password))) {
+        res.status(401);
+        res.json({message: userFriendlyMessage.failure.incorrectPassword});
+        return;
+      }
+
+      const payload: Payload = {
+        id: user.id,
+      };
+      const accessToken = JWTUtils.generateAccessToken(payload);
+
+      res.json({
+        message: userFriendlyMessage.success.signIn,
+        data: {
+          accessToken: accessToken,
+        },
+      });
+    } catch (e) {
+      res.status(400);
+      res.json({message: userFriendlyMessage.failure.signIn});
+      next(e);
+    }
+  }
+
   async googleAuth(req: Request, res: Response, next: NextFunction) {
     try {
       const {tokens} = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
