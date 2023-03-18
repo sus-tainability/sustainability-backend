@@ -1,5 +1,5 @@
 import jwt, {SignOptions} from 'jsonwebtoken';
-import enviroment from '../consts/enviroment';
+import enviroment from '../consts/environment';
 import {Payload} from '../models/User';
 
 class JWTUtils {

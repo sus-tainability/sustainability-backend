@@ -5,6 +5,10 @@ import UserRepository from './repositories/UserRepository';
 import UserRouter from './routes/UserRoutes';
 import UserService from './services/UserService';
 
+import AuthenticationController from './controllers/AuthenticationController';
+import AuthenticationRoutes from './routes/AuthenticationRoutes';
+import AuthenticationMiddleware from './middlewares/authentication';
+
 import sequelize from './db';
 import models from './models';
 
@@ -47,6 +51,7 @@ export default class App {
   }
 
   public initControllers() {
+    this.app.use('/', AuthenticationRoutes());
     this.app.use('/users', UserRouter());
   }
 
@@ -62,9 +67,14 @@ export default class App {
 
     // Controllers
     container.register('UserController', UserController, ['UserService']);
+    container.register('AuthenticationController', AuthenticationController, [
+      'UserService',
+    ]);
 
     // Middlewares
-    // insert middlewares here
+    container.register('AuthenticationMiddleware', AuthenticationMiddleware, [
+      'UserService',
+    ]);
   }
 
   public listen(port: string) {
