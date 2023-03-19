@@ -1,4 +1,3 @@
-import {Model} from 'sequelize';
 // import {EventAttributes, EventCreationAttributes} from '../models/Event';
 import EventRepository, {FullEvent} from '../repositories/EventRepository';
 
@@ -9,16 +8,22 @@ export default class EventService {
     this.eventRepository = eventRepository;
   }
 
-  public async getEventById(
+  public async getEventWithAttempt(
     eventId: number,
     userId: number
   ): Promise<FullEvent> {
-    const fullEvent = (await this.eventRepository.getEvent(
+    const fullEvent = await this.eventRepository.getEventWithAttempt(
       eventId,
       userId
-    )) as Model<FullEvent>[];
+    );
 
-    console.log(fullEvent);
+    if (!fullEvent) {
+      return undefined;
+    }
+
+    if (fullEvent.length === 0) {
+      return undefined;
+    }
 
     return fullEvent[0].get({plain: true});
   }

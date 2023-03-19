@@ -9,13 +9,23 @@ export default class UserController {
     this.eventService = eventService;
   }
 
-  async getOneEventById(req: Request, res: Response, next: NextFunction) {
+  async getEventWithAttempt(req: Request, res: Response, next: NextFunction) {
     try {
       const {id} = req.params;
       const {user} = req;
-      const event = await this.eventService.getEventById(parseInt(id), user.id);
+      const event = await this.eventService.getEventWithAttempt(
+        parseInt(id),
+        user.id
+      );
 
-      console.log(event);
+      if (!event) {
+        res.status(200);
+        res.json({
+          message: userFriendlyMessage.failure.eventNotFound,
+          data: [],
+        });
+        return;
+      }
 
       const assets = event.attempts[0].assets.map(a => {
         console.log(a);

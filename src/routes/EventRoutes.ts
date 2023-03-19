@@ -15,9 +15,9 @@ export default () => {
     authenticationMiddleware.authentication(req, res, next);
 
   eventRouter.get(
-    '/:id',
+    '/withAttempt/:id',
     [auth],
-    eventController.getOneEventById.bind(eventController)
+    eventController.getEventWithAttempt.bind(eventController)
   );
 
   return eventRouter;
