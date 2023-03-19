@@ -19,10 +19,18 @@ export default class UserController {
       );
 
       if (!event) {
+        const eventWithoutAttempt = (
+          await this.eventService.getEventById(parseInt(id))
+        ).get({plain: true});
+
         res.status(200);
         res.json({
-          message: userFriendlyMessage.failure.eventNotFound,
-          data: [],
+          message: userFriendlyMessage.success.getOneEvent,
+          data: {
+            ...eventWithoutAttempt,
+            carbonSavePerAsset: eventWithoutAttempt.carbonSave,
+            attempt: null,
+          },
         });
         return;
       }
@@ -53,8 +61,8 @@ export default class UserController {
         eventId: event.attempts[0].eventId,
         userId: event.attempts[0].userId,
         startDate: event.attempts[0].startDate,
-        assets,
         carbonSave: event.carbonSave * numOfValidatedImages,
+        assets,
         createdAt: event.attempts[0].createdAt,
         updatedAt: event.attempts[0].updatedAt,
       };
@@ -63,14 +71,14 @@ export default class UserController {
         id: event.id,
         name: event.name,
         description: event.description,
+        carbonSavePerAsset: event.carbonSave,
         eventDuration: event.eventDuration,
         reward: event.reward,
         requiredAssets: event.requiredAssets,
         imageUrl: event.imageUrl,
-        carbonSavePerAsset: event.carbonSave,
-        attempt,
         createdAt: event.createdAt,
         updatedAt: event.updatedAt,
+        attempt,
       };
 
       res.json({

@@ -1,5 +1,6 @@
 // import {EventAttributes, EventCreationAttributes} from '../models/Event';
 import EventRepository, {FullEvent} from '../repositories/EventRepository';
+import Event from '../models/Event';
 
 export default class EventService {
   private eventRepository: EventRepository;
@@ -26,5 +27,10 @@ export default class EventService {
     }
 
     return fullEvent[0].get({plain: true});
+  }
+
+  public async getEventById(eventId: number): Promise<Event> {
+    const event = await this.eventRepository.getWithFilters({id: eventId});
+    return event[0] as Event;
   }
 }

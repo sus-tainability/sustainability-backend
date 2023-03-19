@@ -22,7 +22,6 @@ export default {
     userNotExist: 'User does not exist.',
 
     getOneEvent: 'Error in retrieving Event.',
-    eventNotFound: 'Associated Attempt with Event not found.',
 
     emailExists: 'Email already exists.',
     noAuthToken: 'Authorization token not found',
