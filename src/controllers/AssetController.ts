@@ -1,4 +1,3 @@
-import fs from 'fs';
 import {NextFunction, Request, Response} from 'express';
 import userFriendlyMessage from '../consts/userFriendlyMessages';
 import AssetService from '../services/AssetService';
