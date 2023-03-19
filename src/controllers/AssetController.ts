@@ -24,21 +24,19 @@ export default class AssetController {
   async getPendingAssets(req: Request, res: Response, next: NextFunction) {
     try {
       type OutputData = {
+        id: number;
         eventId: number;
         name: string;
         description: string;
         validationText: string;
-        images: {
-          id: number;
-          imageUrl: string;
-          status: string;
-        }[];
+        imageUrl: string;
+        status: string;
       };
 
       const assets = await this.assetService.getAllAssetAndImages();
 
-      const outputData: OutputData[] = assets.map(event => {
-        const {id, name, description, validationText} = event;
+      const outputData: OutputData[] = assets.flatMap(event => {
+        const {id: eventId, name, description, validationText} = event;
         const images = event.attempts.flatMap(attempt => {
           const assetImages = attempt.assets.map(asset => {
             const {id, imageUrl} = asset.images;
@@ -47,12 +45,19 @@ export default class AssetController {
               asset.images.requiredTotal
                 ? 'pending'
                 : 'completed';
-            return {id, imageUrl, status};
+            return {
+              id,
+              imageUrl,
+              status,
+              eventId,
+              name,
+              description,
+              validationText,
+            };
           });
-
           return assetImages.filter(imgs => imgs.status === 'pending');
         });
-        return {eventId: id, name, description, validationText, images};
+        return images;
       });
 
       res.status(200);
