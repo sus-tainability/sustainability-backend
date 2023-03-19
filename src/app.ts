@@ -63,7 +63,7 @@ export default class App {
       );
       res.header(
         'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, x-auth-token'
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
       );
       next();
     });
