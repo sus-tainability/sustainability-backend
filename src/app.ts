@@ -12,6 +12,11 @@ import EventService from './services/EventService';
 
 import PartOfRepository from './repositories/PartOfRepository';
 
+import StoryRepsitory from './repositories/StoryRepository';
+import StoryService from './services/StoryService';
+import StoryController from './controllers/StoryController';
+import StoryRouter from './routes/StoryRoutes';
+
 import AuthenticationController from './controllers/AuthenticationController';
 import AuthenticationRoutes from './routes/AuthenticationRoutes';
 import AuthenticationMiddleware from './middlewares/authentication';
@@ -61,6 +66,7 @@ export default class App {
     this.app.use('/', AuthenticationRoutes());
     this.app.use('/users', UserRouter());
     this.app.use('/events', EventRouter());
+    this.app.use('/story', StoryRouter());
   }
 
   public async initContainer() {
@@ -71,6 +77,7 @@ export default class App {
     container.register('UserRepository', UserRepository, ['db']);
     container.register('EventRepository', EventRepository, ['db']);
     container.register('PartOfRepository', PartOfRepository, ['db']);
+    container.register('StoryRepository', StoryRepsitory, ['db']);
 
     // Services
     container.register('UserService', UserService, ['UserRepository']);
@@ -78,6 +85,7 @@ export default class App {
       'EventRepository',
       'PartOfRepository',
     ]);
+    container.register('StoryService', StoryService, ['StoryRepository']);
 
     // Controllers
     container.register('UserController', UserController, ['UserService']);
@@ -85,6 +93,7 @@ export default class App {
       'UserService',
     ]);
     container.register('EventController', EventController, ['EventService']);
+    container.register('StoryController', StoryController, ['StoryService']);
 
     // Middlewares
     container.register('AuthenticationMiddleware', AuthenticationMiddleware, [

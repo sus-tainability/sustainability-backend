@@ -12,6 +12,8 @@ export default {
     noCurrentEvents: 'No current events running.',
     getAllEvents: 'Successfully retrieved Events.',
 
+    getOneStory: 'Sucessfully retrieved Story.',
+
     signIn: 'Successfully signed in.',
     setPassword: 'Successfully set password',
     resetPassword: 'Successfully reset password.',
@@ -26,6 +28,8 @@ export default {
 
     getOneEvent: 'Error in retrieving Event.',
     getAllEvents: 'Error in retrieving Events.',
+
+    getOneStory: 'Error in retrieving Story.',
 
     emailExists: 'Email already exists.',
     noAuthToken: 'Authorization token not found',
