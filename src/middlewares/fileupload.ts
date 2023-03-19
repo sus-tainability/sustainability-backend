@@ -1,5 +1,6 @@
 import {Request} from 'express';
 import multer, {FileFilterCallback} from 'multer';
+import util from 'util';
 
 const fileFilter = (
   req: Request,
@@ -17,6 +18,10 @@ const fileFilter = (
   }
 };
 
-const upload = multer({dest: 'tmp/', fileFilter: fileFilter});
+const upload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: fileFilter,
+  limits: {fileSize: 1024 * 1024 * 5}, // no larger than 5MB
+}).single('file');
 
-export default upload.single('file');
+export default util.promisify(upload);

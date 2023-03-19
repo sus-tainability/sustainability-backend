@@ -25,9 +25,15 @@ export default class AssetService {
       const newAsset = (await this.assetRepository.createOne(asset, {
         transaction: t,
       })) as Asset;
-      const newImage = (await this.imageRepository.createOne(image, {
-        transaction: t,
-      })) as Image;
+      const newImage = (await this.imageRepository.createOne(
+        {
+          ...image,
+          id: newAsset.id,
+        },
+        {
+          transaction: t,
+        }
+      )) as Image;
       return {newAsset, newImage};
     });
   }

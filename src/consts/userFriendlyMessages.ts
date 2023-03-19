@@ -60,5 +60,7 @@ export default {
 
     invalidPassword:
       'Password must at least be 6 characters long with at least 1 special character (@ $ ! % * # ? &).',
+
+    fileNotFound: 'File not found.',
   },
 };
