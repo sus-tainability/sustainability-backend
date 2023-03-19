@@ -14,6 +14,8 @@ export default {
 
     getOneStory: 'Sucessfully retrieved Story.',
 
+    createOneAttempt: 'Successfully created Attempt.',
+
     signIn: 'Successfully signed in.',
     setPassword: 'Successfully set password',
     resetPassword: 'Successfully reset password.',
@@ -30,6 +32,8 @@ export default {
     getAllEvents: 'Error in retrieving Events.',
 
     getOneStory: 'Error in retrieving Story.',
+
+    createOneAttempt: 'Error in creating Attempt.',
 
     emailExists: 'Email already exists.',
     noAuthToken: 'Authorization token not found',

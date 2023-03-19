@@ -17,6 +17,11 @@ import StoryService from './services/StoryService';
 import StoryController from './controllers/StoryController';
 import StoryRouter from './routes/StoryRoutes';
 
+import AttemptRouter from './routes/AttemptRoutes';
+import AttemptController from './controllers/AttemptController';
+import AttemptRepository from './repositories/AttemptRepository';
+import AttemptService from './services/AttemptService';
+
 import AuthenticationController from './controllers/AuthenticationController';
 import AuthenticationRoutes from './routes/AuthenticationRoutes';
 import AuthenticationMiddleware from './middlewares/authentication';
@@ -67,6 +72,7 @@ export default class App {
     this.app.use('/users', UserRouter());
     this.app.use('/events', EventRouter());
     this.app.use('/story', StoryRouter());
+    this.app.use('/attempt', AttemptRouter());
   }
 
   public async initContainer() {
@@ -78,6 +84,7 @@ export default class App {
     container.register('EventRepository', EventRepository, ['db']);
     container.register('PartOfRepository', PartOfRepository, ['db']);
     container.register('StoryRepository', StoryRepsitory, ['db']);
+    container.register('AttemptRepository', AttemptRepository, ['db']);
 
     // Services
     container.register('UserService', UserService, ['UserRepository']);
@@ -86,6 +93,7 @@ export default class App {
       'PartOfRepository',
     ]);
     container.register('StoryService', StoryService, ['StoryRepository']);
+    container.register('AttemptService', AttemptService, ['AttemptRepository']);
 
     // Controllers
     container.register('UserController', UserController, ['UserService']);
@@ -94,6 +102,9 @@ export default class App {
     ]);
     container.register('EventController', EventController, ['EventService']);
     container.register('StoryController', StoryController, ['StoryService']);
+    container.register('AttemptController', AttemptController, [
+      'AttemptService',
+    ]);
 
     // Middlewares
     container.register('AuthenticationMiddleware', AuthenticationMiddleware, [
