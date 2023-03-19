@@ -41,7 +41,6 @@ export default class EventService {
   }
 
   public async getEventsPartOfStory(storyId: number) {
-    console.log(this.partOfRepository);
     const events = await this.partOfRepository.getAllEventByPartOf(storyId);
     return events;
   }

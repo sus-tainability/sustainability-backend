@@ -13,6 +13,7 @@ export default class UserController {
     try {
       // TODO: change magic number to storyId from user
       const events = await this.eventService.getEventsPartOfStory(1);
+      const {user} = req;
 
       // get closest two future events based on start date
       // returns null if no future events
@@ -27,10 +28,16 @@ export default class UserController {
             eventOne: {
               ...e.eventOne,
               votes: e.eventOne.votes.length,
+              isYourVote: e.eventOne.votes.some(
+                vote => vote.userId === user.id
+              ),
             },
             eventTwo: {
               ...e.eventTwo,
               votes: e.eventTwo.votes.length,
+              isYourVote: e.eventOne.votes.some(
+                vote => vote.userId === user.id
+              ),
             },
           };
         })
