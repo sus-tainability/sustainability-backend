@@ -16,6 +16,18 @@ export default () => {
     authenticationMiddleware.authentication(req, res, next);
 
   assetRouter.post(
+    '/images/validate',
+    [auth],
+    assetController.validateImageAsset.bind(assetController)
+  );
+
+  assetRouter.post(
+    '/images/reject',
+    [auth],
+    assetController.rejectImageAsset.bind(assetController)
+  );
+
+  assetRouter.post(
     '/images/new',
     [auth, fileupload],
     assetController.createNewImageAsset.bind(assetController)

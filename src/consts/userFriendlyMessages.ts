@@ -7,6 +7,9 @@ export default {
     updateUser: 'Successfully updated User.',
     deleteUser: 'Successfully deleted User(s).',
 
+    validateImageAsset: 'Successfully validated Image Asset.',
+    rejectImageAsset: 'Successfully rejected Image Asset.',
+
     getOneEvent: 'Successfully retrieved Event.',
     noFutureEvents: 'No future events.',
     noCurrentEvents: 'No current events running.',
@@ -32,6 +35,9 @@ export default {
     updateUser: 'Error in updating User.',
     deleteUser: 'Error in deleting User(s).',
     userNotExist: 'User does not exist.',
+
+    validateImageAsset: 'Error in validating Image Asset.',
+    rejectImageAsset: 'Error in rejecting Image Asset.',
 
     getOneEvent: 'Error in retrieving Event.',
     getAllEvents: 'Error in retrieving Events.',

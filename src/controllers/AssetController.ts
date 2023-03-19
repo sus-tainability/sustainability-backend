@@ -21,6 +21,34 @@ export default class AssetController {
     this.assetService = assetService;
   }
 
+  async validateImageAsset(req: Request, res: Response, next: NextFunction) {
+    try {
+      const {user} = req;
+      const {imageId} = req.body;
+      await this.assetService.validateImageAsset(imageId, user.id);
+      res.status(200);
+      res.json({message: userFriendlyMessage.success.validateImageAsset});
+    } catch (err) {
+      res.status(400);
+      res.json({message: userFriendlyMessage.failure.validateImageAsset});
+      next(err);
+    }
+  }
+
+  async rejectImageAsset(req: Request, res: Response, next: NextFunction) {
+    try {
+      const {user} = req;
+      const {imageId} = req.body;
+      await this.assetService.rejectImageAsset(imageId, user.id);
+      res.status(200);
+      res.json({message: userFriendlyMessage.success.rejectImageAsset});
+    } catch (err) {
+      res.status(400);
+      res.json({message: userFriendlyMessage.failure.rejectImageAsset});
+      next(err);
+    }
+  }
+
   async getPendingAssets(req: Request, res: Response, next: NextFunction) {
     try {
       type OutputData = {

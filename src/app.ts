@@ -33,6 +33,9 @@ import AssetService from './services/AssetService';
 import AssetController from './controllers/AssetController';
 import AssetRouter from './routes/AssetRoutes';
 
+import RejectedRepository from './repositories/RejectedRepository';
+import ValidatedRepository from './repositories/ValidatedRepository';
+
 import AuthenticationController from './controllers/AuthenticationController';
 import AuthenticationRoutes from './routes/AuthenticationRoutes';
 import AuthenticationMiddleware from './middlewares/authentication';
@@ -101,6 +104,8 @@ export default class App {
     container.register('VoteRepository', VoteRepository, ['db']);
     container.register('ImageRepository', ImageRepository, ['db']);
     container.register('AssetRepository', AssetRepository, ['db']);
+    container.register('RejectedRepository', RejectedRepository, ['db']);
+    container.register('ValidatedRepository', ValidatedRepository, ['db']);
 
     // Services
     container.register('UserService', UserService, ['UserRepository']);
@@ -115,6 +120,8 @@ export default class App {
       'AssetRepository',
       'ImageRepository',
       'EventRepository',
+      'RejectedRepository',
+      'ValidatedRepository',
     ]);
 
     // Controllers
