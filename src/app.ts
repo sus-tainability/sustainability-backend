@@ -27,6 +27,12 @@ import VoteController from './controllers/VoteController';
 import VoteRepository from './repositories/VoteRepository';
 import VoteService from './services/VoteService';
 
+import ImageRepository from './repositories/ImageRepository';
+import AssetRepository from './repositories/AssetRepository';
+import AssetService from './services/AssetService';
+import AssetController from './controllers/AssetController';
+import AssetRouter from './routes/AssetRoutes';
+
 import AuthenticationController from './controllers/AuthenticationController';
 import AuthenticationRoutes from './routes/AuthenticationRoutes';
 import AuthenticationMiddleware from './middlewares/authentication';
@@ -79,6 +85,7 @@ export default class App {
     this.app.use('/story', StoryRouter());
     this.app.use('/attempt', AttemptRouter());
     this.app.use('/vote', VoteRouter());
+    this.app.use('/assets', AssetRouter());
   }
 
   public async initContainer() {
@@ -92,6 +99,8 @@ export default class App {
     container.register('StoryRepository', StoryRepsitory, ['db']);
     container.register('AttemptRepository', AttemptRepository, ['db']);
     container.register('VoteRepository', VoteRepository, ['db']);
+    container.register('ImageRepository', ImageRepository, ['db']);
+    container.register('AssetRepository', AssetRepository, ['db']);
 
     // Services
     container.register('UserService', UserService, ['UserRepository']);
@@ -102,6 +111,10 @@ export default class App {
     container.register('StoryService', StoryService, ['StoryRepository']);
     container.register('AttemptService', AttemptService, ['AttemptRepository']);
     container.register('VoteService', VoteService, ['VoteRepository']);
+    container.register('AssetService', AssetService, [
+      'AssetRepository',
+      'ImageRepository',
+    ]);
 
     // Controllers
     container.register('UserController', UserController, ['UserService']);
@@ -114,6 +127,7 @@ export default class App {
       'AttemptService',
     ]);
     container.register('VoteController', VoteController, ['VoteService']);
+    container.register('AssetController', AssetController, ['AssetService']);
 
     // Middlewares
     container.register('AuthenticationMiddleware', AuthenticationMiddleware, [

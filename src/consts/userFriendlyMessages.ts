@@ -16,6 +16,8 @@ export default {
 
     createOneAttempt: 'Successfully created Attempt.',
 
+    createOneAsset: 'Successfully created Asset.',
+
     createOneVote: 'Successfully created Vote.',
 
     signIn: 'Successfully signed in.',
@@ -36,6 +38,8 @@ export default {
     getOneStory: 'Error in retrieving Story.',
 
     createOneAttempt: 'Error in creating Attempt.',
+
+    createOneAsset: 'Error in creating Asset.',
 
     createOneVote: 'Error in creating Vote.',
 
