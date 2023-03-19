@@ -7,6 +7,8 @@ export default {
     updateUser: 'Successfully updated User.',
     deleteUser: 'Successfully deleted User(s).',
 
+    getOneEvent: 'Successfully retrieved Event.',
+
     signIn: 'Successfully signed in.',
     setPassword: 'Successfully set password',
     resetPassword: 'Successfully reset password.',
@@ -18,6 +20,8 @@ export default {
     updateUser: 'Error in updating User.',
     deleteUser: 'Error in deleting User(s).',
     userNotExist: 'User does not exist.',
+
+    getOneEvent: 'Error in retrieving Event.',
 
     emailExists: 'Email already exists.',
     noAuthToken: 'Authorization token not found',

@@ -11,6 +11,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        userId: 2,
+        eventId: 1,
+        startDate: '2021-03-25T16:05:41.000Z',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 
