@@ -194,6 +194,7 @@ export default class UserController {
         id: event.id,
         name: event.name,
         description: event.description,
+        validationText: event.validationText,
         carbonSavePerAsset: event.carbonSave,
         eventDuration: event.eventDuration,
         reward: event.reward,

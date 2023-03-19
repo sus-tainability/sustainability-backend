@@ -114,6 +114,7 @@ export default class App {
     container.register('AssetService', AssetService, [
       'AssetRepository',
       'ImageRepository',
+      'EventRepository',
     ]);
 
     // Controllers

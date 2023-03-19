@@ -17,6 +17,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      validationText: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       carbonSave: {
         type: Sequelize.INTEGER,
         allowNull: false,

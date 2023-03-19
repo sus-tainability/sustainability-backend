@@ -21,5 +21,11 @@ export default () => {
     assetController.createNewImageAsset.bind(assetController)
   );
 
+  assetRouter.get(
+    '/images/pending',
+    [auth],
+    assetController.getPendingAssets.bind(assetController)
+  );
+
   return assetRouter;
 };

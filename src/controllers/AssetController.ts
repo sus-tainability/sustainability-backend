@@ -21,6 +21,52 @@ export default class AssetController {
     this.assetService = assetService;
   }
 
+  async getPendingAssets(req: Request, res: Response, next: NextFunction) {
+    try {
+      type OutputData = {
+        eventId: number;
+        name: string;
+        description: string;
+        validationText: string;
+        images: {
+          id: number;
+          imageUrl: string;
+          status: string;
+        }[];
+      };
+
+      const assets = await this.assetService.getAllAssetAndImages();
+
+      const outputData: OutputData[] = assets.map(event => {
+        const {id, name, description, validationText} = event;
+        const images = event.attempts.flatMap(attempt => {
+          const assetImages = attempt.assets.map(asset => {
+            const {id, imageUrl} = asset.images;
+            const status =
+              asset.images.validated.length + asset.images.rejected.length <
+              asset.images.requiredTotal
+                ? 'pending'
+                : 'completed';
+            return {id, imageUrl, status};
+          });
+
+          return assetImages.filter(imgs => imgs.status === 'pending');
+        });
+        return {eventId: id, name, description, validationText, images};
+      });
+
+      res.status(200);
+      res.json({
+        message: userFriendlyMessage.success.getAllAssets,
+        data: outputData,
+      });
+    } catch (err) {
+      res.status(400);
+      res.json({message: userFriendlyMessage.failure.getAllAssets});
+      next(err);
+    }
+  }
+
   async createNewImageAsset(req: Request, res: Response, next: NextFunction) {
     if (!req.file) {
       res.status(400);

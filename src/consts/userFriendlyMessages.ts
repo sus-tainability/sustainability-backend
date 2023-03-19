@@ -17,6 +17,7 @@ export default {
     createOneAttempt: 'Successfully created Attempt.',
 
     createOneAsset: 'Successfully created Asset.',
+    getAllAssets: 'Successfully retrieved Assets.',
 
     createOneVote: 'Successfully created Vote.',
 
@@ -40,6 +41,7 @@ export default {
     createOneAttempt: 'Error in creating Attempt.',
 
     createOneAsset: 'Error in creating Asset.',
+    getAllAssets: 'Error in retrieving Assets.',
 
     createOneVote: 'Error in creating Vote.',
 

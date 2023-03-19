@@ -5,6 +5,7 @@ export interface EventAttributes {
   id: number;
   name: string;
   description: string;
+  validationText: string;
   carbonSave: number;
   eventDuration: number;
   reward: number;
@@ -21,6 +22,7 @@ class Event
   public id!: number; // Note that the `null assertion` `!` is required in strict mode.
   public name!: string;
   public description!: string;
+  public validationText!: string;
   public carbonSave!: number;
   public eventDuration!: number;
   public reward!: number;
@@ -53,6 +55,10 @@ class Event
         description: {
           type: new DataTypes.STRING(128),
           allowNull: false,
+        },
+        validationText: {
+          type: new DataTypes.STRING(128),
+          allowNull: true,
         },
         carbonSave: {
           type: DataTypes.INTEGER.UNSIGNED,
