@@ -9,6 +9,52 @@ export default class UserController {
     this.eventService = eventService;
   }
 
+  async getNextEvents(req: Request, res: Response, next: NextFunction) {
+    try {
+      // TODO: change magic number to storyId from user
+      const events = await this.eventService.getEventsPartOfStory(1);
+
+      // get closest two future events based on start date
+      // returns null if no future events
+
+      const now = new Date();
+      const nextEvents = events
+        .map(e => {
+          const startDate = new Date(e.startDate);
+          const isFuture = startDate > now;
+          return {
+            ...e,
+            isFuture,
+          };
+        })
+        .sort((a, b) => {
+          const aDate = new Date(a.startDate);
+          const bDate = new Date(b.startDate);
+          return aDate.getTime() - bDate.getTime();
+        })
+        .find(e => e.isFuture);
+
+      if (!nextEvents) {
+        res.status(200);
+        res.json({
+          message: userFriendlyMessage.success.noFutureEvents,
+          data: null,
+        });
+        return;
+      }
+
+      res.status(200);
+      res.json({
+        message: userFriendlyMessage.success.getAllEvents,
+        data: nextEvents,
+      });
+    } catch (err) {
+      res.status(400);
+      res.json({message: userFriendlyMessage.failure.getAllEvents});
+      next(err);
+    }
+  }
+
   async getEventWithAttempt(req: Request, res: Response, next: NextFunction) {
     try {
       const {id} = req.params;
@@ -36,7 +82,6 @@ export default class UserController {
       }
 
       const assets = event.attempts[0].assets.map(a => {
-        console.log(a);
         return {
           id: a.id,
           attemptId: a.attemptId,

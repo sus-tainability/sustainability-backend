@@ -10,6 +10,8 @@ import EventRepository from './repositories/EventRepository';
 import EventRouter from './routes/EventRoutes';
 import EventService from './services/EventService';
 
+import PartOfRepository from './repositories/PartOfRepository';
+
 import AuthenticationController from './controllers/AuthenticationController';
 import AuthenticationRoutes from './routes/AuthenticationRoutes';
 import AuthenticationMiddleware from './middlewares/authentication';
@@ -68,10 +70,14 @@ export default class App {
     // Repositories
     container.register('UserRepository', UserRepository, ['db']);
     container.register('EventRepository', EventRepository, ['db']);
+    container.register('PartOfRepository', PartOfRepository, ['db']);
 
     // Services
     container.register('UserService', UserService, ['UserRepository']);
-    container.register('EventService', EventService, ['EventRepository']);
+    container.register('EventService', EventService, [
+      'EventRepository',
+      'PartOfRepository',
+    ]);
 
     // Controllers
     container.register('UserController', UserController, ['UserService']);

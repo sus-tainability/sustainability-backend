@@ -1,12 +1,18 @@
 // import {EventAttributes, EventCreationAttributes} from '../models/Event';
 import EventRepository, {FullEvent} from '../repositories/EventRepository';
 import Event from '../models/Event';
+import PartOfRepository from '../repositories/PartOfRepository';
 
 export default class EventService {
   private eventRepository: EventRepository;
+  private partOfRepository: PartOfRepository;
 
-  constructor(eventRepository: EventRepository) {
+  constructor(
+    eventRepository: EventRepository,
+    partOfRepository: PartOfRepository
+  ) {
     this.eventRepository = eventRepository;
+    this.partOfRepository = partOfRepository;
   }
 
   public async getEventWithAttempt(
@@ -32,5 +38,11 @@ export default class EventService {
   public async getEventById(eventId: number): Promise<Event> {
     const event = await this.eventRepository.getWithFilters({id: eventId});
     return event[0] as Event;
+  }
+
+  public async getEventsPartOfStory(storyId: number) {
+    console.log(this.partOfRepository);
+    const events = await this.partOfRepository.getAllEventByPartOf(storyId);
+    return events;
   }
 }

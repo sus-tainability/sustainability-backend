@@ -106,6 +106,7 @@ class Event
         name: 'eventOneId',
         allowNull: false,
       },
+      as: 'eventOne',
     });
     Event.hasMany(models.PartOf, {
       onDelete: 'CASCADE',
@@ -113,6 +114,7 @@ class Event
         name: 'eventTwoId',
         allowNull: false,
       },
+      as: 'eventTwo',
     });
   }
 }
