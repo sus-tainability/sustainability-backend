@@ -182,6 +182,7 @@ export default class UserController {
         eventId: myAttempt.eventId,
         userId: myAttempt.userId,
         startDate: myAttempt.startDate,
+        isCompleted: event.requiredAssets === numOfValidatedImages,
         carbonSave: event.carbonSave * numOfValidatedImages,
         assets,
         createdAt: myAttempt.createdAt,
