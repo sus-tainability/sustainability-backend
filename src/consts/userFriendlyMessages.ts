@@ -16,6 +16,8 @@ export default {
 
     createOneAttempt: 'Successfully created Attempt.',
 
+    createOneVote: 'Successfully created Vote.',
+
     signIn: 'Successfully signed in.',
     setPassword: 'Successfully set password',
     resetPassword: 'Successfully reset password.',
@@ -34,6 +36,8 @@ export default {
     getOneStory: 'Error in retrieving Story.',
 
     createOneAttempt: 'Error in creating Attempt.',
+
+    createOneVote: 'Error in creating Vote.',
 
     emailExists: 'Email already exists.',
     noAuthToken: 'Authorization token not found',

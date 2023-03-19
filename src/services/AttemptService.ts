@@ -1,5 +1,5 @@
 import {AttemptCreationAttributes} from '../models/Attempt';
-import AttemptRepository from '../repositories/UserRepository';
+import AttemptRepository from '../repositories/AttemptRepository';
 import Attempt from '../models/Attempt';
 
 export default class AttemptService {

@@ -22,6 +22,11 @@ import AttemptController from './controllers/AttemptController';
 import AttemptRepository from './repositories/AttemptRepository';
 import AttemptService from './services/AttemptService';
 
+import VoteRouter from './routes/VoteRoutes';
+import VoteController from './controllers/VoteController';
+import VoteRepository from './repositories/VoteRepository';
+import VoteService from './services/VoteService';
+
 import AuthenticationController from './controllers/AuthenticationController';
 import AuthenticationRoutes from './routes/AuthenticationRoutes';
 import AuthenticationMiddleware from './middlewares/authentication';
@@ -73,6 +78,7 @@ export default class App {
     this.app.use('/events', EventRouter());
     this.app.use('/story', StoryRouter());
     this.app.use('/attempt', AttemptRouter());
+    this.app.use('/vote', VoteRouter());
   }
 
   public async initContainer() {
@@ -85,6 +91,7 @@ export default class App {
     container.register('PartOfRepository', PartOfRepository, ['db']);
     container.register('StoryRepository', StoryRepsitory, ['db']);
     container.register('AttemptRepository', AttemptRepository, ['db']);
+    container.register('VoteRepository', VoteRepository, ['db']);
 
     // Services
     container.register('UserService', UserService, ['UserRepository']);
@@ -94,6 +101,7 @@ export default class App {
     ]);
     container.register('StoryService', StoryService, ['StoryRepository']);
     container.register('AttemptService', AttemptService, ['AttemptRepository']);
+    container.register('VoteService', VoteService, ['VoteRepository']);
 
     // Controllers
     container.register('UserController', UserController, ['UserService']);
@@ -105,6 +113,7 @@ export default class App {
     container.register('AttemptController', AttemptController, [
       'AttemptService',
     ]);
+    container.register('VoteController', VoteController, ['VoteService']);
 
     // Middlewares
     container.register('AuthenticationMiddleware', AuthenticationMiddleware, [
