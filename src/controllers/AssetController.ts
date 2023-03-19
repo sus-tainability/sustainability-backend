@@ -57,6 +57,7 @@ export default class AssetController {
         name: string;
         description: string;
         validationText: string;
+        percentageComplete: number;
         imageUrl: string;
         status: string;
       };
@@ -68,17 +69,23 @@ export default class AssetController {
         const images = event.attempts.flatMap(attempt => {
           const assetImages = attempt.assets.map(asset => {
             const {id, imageUrl} = asset.images;
+            const numOfValidated = asset.images.validated.length;
+            const numOfRejected = asset.images.rejected.length;
+            const requiredTotal = asset.images.requiredTotal;
             const status =
-              asset.images.validated.length + asset.images.rejected.length <
-              asset.images.requiredTotal
+              numOfValidated + numOfRejected < requiredTotal
                 ? 'pending'
                 : 'completed';
+            const percentageComplete = parseFloat(
+              ((numOfValidated + numOfRejected) / requiredTotal).toFixed(2)
+            );
             return {
               id,
               imageUrl,
               status,
               eventId,
               name,
+              percentageComplete,
               description,
               validationText,
             };
