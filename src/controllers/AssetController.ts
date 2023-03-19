@@ -69,9 +69,11 @@ export default class AssetController {
         const images = event.attempts.flatMap(attempt => {
           const assetImages = attempt.assets.map(asset => {
             const {id, imageUrl} = asset.images;
+
             const numOfValidated = asset.images.validated.length;
             const numOfRejected = asset.images.rejected.length;
             const requiredTotal = asset.images.requiredTotal;
+
             const status =
               numOfValidated + numOfRejected < requiredTotal
                 ? 'pending'
@@ -79,6 +81,7 @@ export default class AssetController {
             const percentageComplete = parseFloat(
               ((numOfValidated + numOfRejected) / requiredTotal).toFixed(2)
             );
+
             return {
               id,
               imageUrl,

@@ -143,13 +143,12 @@ export default class EventRepository extends BaseRepository {
     });
   }
 
-  async getEventWithAttempt(eventId: number, userId: number) {
+  async getEventWithAttempt(eventId: number) {
     return this.model.findAll({
       where: {id: eventId},
       include: {
         model: models.Attempt,
         as: 'attempts',
-        where: {userId},
         include: [
           {
             model: models.Asset,

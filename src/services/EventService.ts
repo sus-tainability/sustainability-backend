@@ -15,14 +15,8 @@ export default class EventService {
     this.partOfRepository = partOfRepository;
   }
 
-  public async getEventWithAttempt(
-    eventId: number,
-    userId: number
-  ): Promise<FullEvent> {
-    const fullEvent = await this.eventRepository.getEventWithAttempt(
-      eventId,
-      userId
-    );
+  public async getEventWithAttempt(eventId: number): Promise<FullEvent> {
+    const fullEvent = await this.eventRepository.getEventWithAttempt(eventId);
 
     if (!fullEvent) {
       return undefined;

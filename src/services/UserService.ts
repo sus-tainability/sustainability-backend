@@ -48,4 +48,8 @@ export default class UserService {
   async deleteOneUserById(id: number) {
     return this.userRepository.deleteOne({id});
   }
+
+  async getFullUserDetails(id: number) {
+    return await this.userRepository.getFullUserDetails(id);
+  }
 }

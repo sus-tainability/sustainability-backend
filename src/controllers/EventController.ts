@@ -135,14 +135,12 @@ export default class UserController {
 
   async getEventWithAttempt(req: Request, res: Response, next: NextFunction) {
     try {
-      const {id} = req.params;
       const {user} = req;
-      const event = await this.eventService.getEventWithAttempt(
-        parseInt(id),
-        user.id
-      );
+      const {id} = req.params;
+      const event = await this.eventService.getEventWithAttempt(parseInt(id));
+      const myAttempt = event?.attempts.find(a => a.userId === user.id);
 
-      if (!event) {
+      if (!event || !myAttempt) {
         const eventWithoutAttempt = (
           await this.eventService.getEventById(parseInt(id))
         ).get({plain: true});
@@ -159,7 +157,7 @@ export default class UserController {
         return;
       }
 
-      const assets = event.attempts[0].assets.map(a => {
+      const assets = myAttempt.assets.map(a => {
         return {
           id: a.id,
           attemptId: a.attemptId,
@@ -180,14 +178,14 @@ export default class UserController {
       );
 
       const attempt = {
-        attemptId: event.attempts[0].attemptId,
-        eventId: event.attempts[0].eventId,
-        userId: event.attempts[0].userId,
-        startDate: event.attempts[0].startDate,
+        attemptId: myAttempt.attemptId,
+        eventId: myAttempt.eventId,
+        userId: myAttempt.userId,
+        startDate: myAttempt.startDate,
         carbonSave: event.carbonSave * numOfValidatedImages,
         assets,
-        createdAt: event.attempts[0].createdAt,
-        updatedAt: event.attempts[0].updatedAt,
+        createdAt: myAttempt.createdAt,
+        updatedAt: myAttempt.updatedAt,
       };
 
       const outputData = {
@@ -200,6 +198,7 @@ export default class UserController {
         reward: event.reward,
         requiredAssets: event.requiredAssets,
         imageUrl: event.imageUrl,
+        activeParticipants: event.attempts.length,
         createdAt: event.createdAt,
         updatedAt: event.updatedAt,
         attempt,
