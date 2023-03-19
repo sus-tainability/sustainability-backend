@@ -9,6 +9,7 @@ export default {
 
     getOneEvent: 'Successfully retrieved Event.',
     noFutureEvents: 'No future events.',
+    noCurrentEvents: 'No current events running.',
     getAllEvents: 'Successfully retrieved Events.',
 
     signIn: 'Successfully signed in.',

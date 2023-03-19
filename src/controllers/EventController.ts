@@ -16,7 +16,6 @@ export default class UserController {
 
       // get closest two future events based on start date
       // returns null if no future events
-
       const now = new Date();
       const nextEvents = events
         .map(e => {
@@ -25,6 +24,14 @@ export default class UserController {
           return {
             ...e,
             isFuture,
+            eventOne: {
+              ...e.eventOne,
+              votes: e.eventOne.votes.length,
+            },
+            eventTwo: {
+              ...e.eventTwo,
+              votes: e.eventTwo.votes.length,
+            },
           };
         })
         .sort((a, b) => {
@@ -48,6 +55,70 @@ export default class UserController {
         message: userFriendlyMessage.success.getAllEvents,
         data: nextEvents,
       });
+    } catch (err) {
+      res.status(400);
+      res.json({message: userFriendlyMessage.failure.getAllEvents});
+      next(err);
+    }
+  }
+
+  async getCurrentEvent(req: Request, res: Response, next: NextFunction) {
+    // get current event based on startdate, votes and event duration
+    // returns null if no current event
+    try {
+      // TODO: change magic number to storyId from user
+      const events = await this.eventService.getEventsPartOfStory(1);
+
+      const addDays = (date: Date, days: number) => {
+        date.setDate(date.getDate() + days);
+        return date;
+      };
+
+      const now = new Date();
+      const currentEvent = events
+        .map(e => {
+          const startDate = new Date(e.startDate);
+          const endDateOne = addDays(
+            new Date(e.startDate),
+            e.eventOne.eventDuration
+          );
+          const endDateTwo = addDays(
+            new Date(e.startDate),
+            e.eventTwo.eventDuration
+          );
+          const isOnGoingOne = startDate < now && now < endDateOne;
+          const isOnGoingTwo = startDate < now && now < endDateTwo;
+          return {
+            ...e,
+            isCurrent: isOnGoingOne || isOnGoingTwo,
+            eventOne: {
+              ...e.eventOne,
+              votes: e.eventOne.votes.length,
+              isOngoing: isOnGoingOne,
+            },
+            eventTwo: {
+              ...e.eventTwo,
+              votes: e.eventTwo.votes.length,
+              isOngoing: isOnGoingTwo,
+            },
+          };
+        })
+        .find(e => e.isCurrent);
+
+      if (!currentEvent) {
+        res.status(200);
+        res.json({
+          message: userFriendlyMessage.success.noCurrentEvents,
+          data: null,
+        });
+        return;
+      }
+      const winningEvent =
+        currentEvent.eventOne.votes > currentEvent.eventTwo.votes
+          ? currentEvent.eventOne
+          : currentEvent.eventTwo;
+      req.params.id = winningEvent.id.toString();
+      return this.getEventWithAttempt(req, res, next);
     } catch (err) {
       res.status(400);
       res.json({message: userFriendlyMessage.failure.getAllEvents});

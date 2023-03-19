@@ -5,41 +5,6 @@ import PartOf from '../models/PartOf';
 import {ModelStatic} from '../types';
 import BaseRepository from './BaseRepository';
 
-// {
-//   "eventOneId": 1,
-//   "eventTwoId": 2,
-//   "storyId": 1,
-//   "name": "Choose Event 1 or 2",
-//   "description": "This is an Event Choosing Description",
-//   "startDate": "2021-03-18T14:22:51.000Z",
-//   "createdAt": "2023-03-18T18:11:57.336Z",
-//   "updatedAt": "2023-03-18T18:11:57.336Z",
-//   "eventOne": {
-//       "id": 1,
-//       "name": "Event 1",
-//       "description": "Event 1 description",
-//       "carbonSave": 100,
-//       "eventDuration": 5,
-//       "reward": 100,
-//       "requiredAssets": 5,
-//       "imageUrl": "https://www.svgrepo.com/download/20675/open-cardboard-box.svg",
-//       "createdAt": "2023-03-18T18:11:57.327Z",
-//       "updatedAt": "2023-03-18T18:11:57.327Z"
-//   },
-//   "eventTwo": {
-//       "id": 2,
-//       "name": "Event 2",
-//       "description": "Event 2 description",
-//       "carbonSave": 100,
-//       "eventDuration": 5,
-//       "reward": 100,
-//       "requiredAssets": 5,
-//       "imageUrl": "https://cdn-icons-png.flaticon.com/512/5228/5228562.png",
-//       "createdAt": "2023-03-18T18:11:57.327Z",
-//       "updatedAt": "2023-03-18T18:11:57.327Z"
-//   }
-// },
-
 export type PartOfWithEvents = {
   id: number;
   eventOneId: number;
@@ -61,6 +26,11 @@ export type PartOfWithEvents = {
     imageUrl: string;
     createdAt: string;
     updatedAt: string;
+    votes: {
+      id: number;
+      eventId: number;
+      userId: number;
+    }[];
   };
   eventTwo: {
     id: number;
@@ -73,6 +43,11 @@ export type PartOfWithEvents = {
     imageUrl: string;
     createdAt: string;
     updatedAt: string;
+    votes: {
+      id: number;
+      eventId: number;
+      userId: number;
+    }[];
   };
 };
 
@@ -88,10 +63,22 @@ export default class PartOfRepository extends BaseRepository {
         {
           model: models.Event,
           as: 'eventOne',
+          include: [
+            {
+              model: models.Vote,
+              as: 'votes',
+            },
+          ],
         },
         {
           model: models.Event,
           as: 'eventTwo',
+          include: [
+            {
+              model: models.Vote,
+              as: 'votes',
+            },
+          ],
         },
       ],
     });
