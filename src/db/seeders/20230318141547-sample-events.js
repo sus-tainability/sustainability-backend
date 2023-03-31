@@ -23,7 +23,7 @@ module.exports = {
           'By recycling cardboard and cartons, you can reduce your impact on the environment and help protect the forests that red pandas call home.',
         validationText: 'Verify if this is a cardboard or carton',
         carbonSave: 300, // TODO- Will update this with new data
-        eventDuration: 3,
+        eventDuration: 4,
         reward: 400,
         requiredAssets: 3,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/685/685388.png',
@@ -36,7 +36,7 @@ module.exports = {
           'By opting in for e-statements, you can reduce your paper usage and help protect the forests that red pandas call home.',
         validationText: 'Verify if this is a e-statement switch',
         carbonSave: 100, // TODO- Will update this with new data
-        eventDuration: 3,
+        eventDuration: 4,
         reward: 400,
         requiredAssets: 1,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/2377/2377960.png',
@@ -88,7 +88,7 @@ module.exports = {
           'Appliances with higher energy efficiency ratings use less energy and can help us conserve this precious resource.',
         validationText: 'Verify if this is a energy efficiency label',
         carbonSave: 700, // TODO- Will update this with new data
-        eventDuration: 5,
+        eventDuration: 4,
         reward: 700,
         requiredAssets: 3,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/2731/2731636.png',
@@ -99,7 +99,7 @@ module.exports = {
         name: 'Donate: WWF',
         description: 'Donate to the World Wide Fund for Nature.',
         carbonSave: 100, // TODO- Will update this with new data
-        eventDuration: 7,
+        eventDuration: 4,
         reward: 1000,
         requiredAssets: 1,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/3349/3349507.png',
@@ -112,7 +112,7 @@ module.exports = {
         validationText:
           'Verify if this is a donation receipt to Red Panda Network',
         carbonSave: 100, // TODO- Will update this with new data
-        eventDuration: 7,
+        eventDuration: 4,
         reward: 1000,
         requiredAssets: 1,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/3349/3349507.png',

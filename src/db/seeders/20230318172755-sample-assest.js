@@ -10,7 +10,27 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        attemptId: 1,
+        attemptId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        attemptId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        attemptId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        attemptId: 5,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        attemptId: 6,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
