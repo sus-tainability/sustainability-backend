@@ -27,6 +27,12 @@ export default () => {
   );
 
   eventRouter.get(
+    '/next/:id1/:id2',
+    [auth],
+    eventController.getNextEventsByIds.bind(eventController)
+  );
+
+  eventRouter.get(
     '/:id',
     [auth],
     eventController.getEventWithAttempt.bind(eventController)

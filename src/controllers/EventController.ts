@@ -9,6 +9,29 @@ export default class UserController {
     this.eventService = eventService;
   }
 
+  async getNextEventsByIds(req: Request, res: Response, next: NextFunction) {
+    try {
+      const events = await this.eventService.getEventsPartOfStory(1);
+      const {id1, id2} = req.params;
+
+      const nextEvents = events.filter(event => {
+        const isEventOne = event.eventOne.id === Number(id1);
+        const isEventTwo = event.eventTwo.id === Number(id2);
+        return isEventOne && isEventTwo;
+      });
+
+      res.status(200);
+      res.json({
+        message: userFriendlyMessage.success.getAllEvents,
+        data: nextEvents,
+      });
+    } catch (err) {
+      res.status(400);
+      res.json({message: userFriendlyMessage.failure.getAllEvents});
+      next(err);
+    }
+  }
+
   async getNextEvents(req: Request, res: Response, next: NextFunction) {
     try {
       // TODO: change magic number to storyId from user
