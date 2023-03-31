@@ -20,10 +20,19 @@ export default class UserController {
         return isEventOne && isEventTwo;
       });
 
+      if (nextEvents.length === 0) {
+        res.status(200);
+        res.json({
+          message: userFriendlyMessage.success.noFutureEvents,
+          data: null,
+        });
+        return;
+      }
+
       res.status(200);
       res.json({
         message: userFriendlyMessage.success.getAllEvents,
-        data: nextEvents,
+        data: nextEvents[0],
       });
     } catch (err) {
       res.status(400);
