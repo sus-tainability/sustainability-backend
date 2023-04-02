@@ -20,7 +20,7 @@ module.exports = {
         storyId: 1,
         name: 'Less Paper, More Trees',
         description:
-          "Deforestation is the major threat to the red pandas' population. Even when forests are only partially cut down, deforestation can still lead to massive population losses for red pandas.",
+          'Deforestation is a major threat to the red panda population.',
         startDate: '2023-06-01T00:00:00.000Z',
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -42,7 +42,7 @@ module.exports = {
         storyId: 1,
         name: 'Appliance Labels Matter',
         description:
-          'Another way to reduce our carbon footprint is by conserving energy. By taking small steps to conserve energy, we can help reduce greenhouse gas emissions and slow the effects of climate change.',
+          'Another way to reduce our carbon footprints is by conserving energy.',
         startDate: '2023-06-12T14:22:51.000Z',
         createdAt: new Date(),
         updatedAt: new Date(),
