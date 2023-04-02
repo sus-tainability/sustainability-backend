@@ -62,11 +62,15 @@ export default class AssetController {
         status: string;
       };
 
+      const {user} = req;
       const assets = await this.assetService.getAllAssetAndImages();
 
       const outputData: OutputData[] = assets.flatMap(event => {
         const {id: eventId, name, description, validationText} = event;
-        const images = event.attempts.flatMap(attempt => {
+        const eventWithOutMyAttempts = event.attempts.filter(
+          a => a.userId !== user.id
+        );
+        const images = eventWithOutMyAttempts.flatMap(attempt => {
           const assetImages = attempt.assets.map(asset => {
             const {id, imageUrl} = asset.images;
 
