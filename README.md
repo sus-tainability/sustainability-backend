@@ -1,6 +1,6 @@
-# Application Backend
+# EcoQuest Backend
 
-_Application Description_
+The back end application for the EcoQuest Frontend. Mangages the database and API calls. 
 
 ## Inital setup
 
@@ -18,9 +18,8 @@ _Application Description_
 
 ## Documentation
 
-- [**Production Link**]()
-- [**Documentation Link**]()
-- [**Entity Relation Diagram**](https://drawsql.app/teams/santosh-2/diagrams/hopehire)
+- [**Production Link**](https://sus-backend.herokuapp.com/)
+- [**Entity Relation Diagram**](https://drawsql.app/teams/butters/diagrams/sus-tainability)
 
 ### File Structure and Naming Convention
 
