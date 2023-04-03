@@ -1,6 +1,8 @@
+![EXPORT - BetterEarth Render](https://user-images.githubusercontent.com/29945147/229606920-ecda83e4-2106-4f6f-913f-c22771ce89cc.png)
+
 # EcoQuest Backend
 
-The back end application for the EcoQuest Frontend. Mangages the database and API calls. 
+Welcome to the EcoQuest Backend! Our game promotes sustainable living by engaging users in activities that encourage responsible consumption. By completing these events, users can earn credits that can be redeemed for prizes.
 
 ## Inital setup
 
@@ -20,6 +22,10 @@ The back end application for the EcoQuest Frontend. Mangages the database and AP
 
 - [**Production Link**](https://sus-backend.herokuapp.com/)
 - [**Entity Relation Diagram**](https://drawsql.app/teams/butters/diagrams/sus-tainability)
+
+### Relation Diagram
+<img width="559" alt="image" src="https://user-images.githubusercontent.com/29945147/229607493-6d27246b-801a-4d70-b6c5-8c47c1bc86ab.png">
+
 
 ### File Structure and Naming Convention
 
