@@ -11,6 +11,7 @@ export interface EventAttributes {
   reward: number;
   requiredAssets: number;
   imageUrl: string;
+  challegeImgUrl: string;
 }
 
 export type EventCreationAttributes = Optional<EventAttributes, 'id'>;
@@ -28,6 +29,7 @@ class Event
   public reward!: number;
   public requiredAssets!: number;
   public imageUrl!: string;
+  public challegeImgUrl!: string;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -77,6 +79,10 @@ class Event
           allowNull: false,
         },
         imageUrl: {
+          type: new DataTypes.STRING(128),
+          allowNull: false,
+        },
+        challegeImgUrl: {
           type: new DataTypes.STRING(128),
           allowNull: false,
         },

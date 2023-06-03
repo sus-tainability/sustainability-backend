@@ -35,7 +35,9 @@ export default class EventService {
   }
 
   public async getEventsPartOfStory(storyId: number) {
+    console.log('hello');
     const events = await this.partOfRepository.getAllEventByPartOf(storyId);
+    console.log(events);
     return events;
   }
 }
