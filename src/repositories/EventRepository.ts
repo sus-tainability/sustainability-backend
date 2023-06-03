@@ -15,6 +15,7 @@ export type AssetsAndImages = {
   reward: number;
   requiredAssets: number;
   imageUrl: string;
+  challegeImgUrl: string;
   createdAt: Date;
   updatedAt: Date;
   attempts: {
@@ -65,6 +66,7 @@ export type FullEvent =
       reward: number;
       requiredAssets: number;
       imageUrl: string;
+      challegeImgUrl: string;
       createdAt: Date;
       updatedAt: Date;
       personalContributionHowTo: string;

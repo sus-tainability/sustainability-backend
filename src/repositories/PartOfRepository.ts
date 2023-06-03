@@ -15,6 +15,7 @@ export type PartOfWithEvents = {
   startDate: string;
   createdAt: string;
   updatedAt: string;
+  voteImgUrl: string;
   eventOne: {
     id: number;
     name: string;
@@ -24,6 +25,7 @@ export type PartOfWithEvents = {
     reward: number;
     requiredAssets: number;
     imageUrl: string;
+    challegeImgUrl: string;
     createdAt: string;
     updatedAt: string;
     votes: {
@@ -41,6 +43,7 @@ export type PartOfWithEvents = {
     reward: number;
     requiredAssets: number;
     imageUrl: string;
+    challegeImgUrl: string;
     createdAt: string;
     updatedAt: string;
     votes: {

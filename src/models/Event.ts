@@ -11,8 +11,10 @@ export interface EventAttributes {
   reward: number;
   requiredAssets: number;
   imageUrl: string;
+  enhancement/add-event-information-fields
   personalContributionHowTo: string;
   communityContributionHowTo: string;
+  challegeImgUrl: string;
 }
 
 export type EventCreationAttributes = Optional<EventAttributes, 'id'>;
@@ -32,6 +34,7 @@ class Event
   public imageUrl!: string;
   public personalContributionHowTo!: string;
   public communityContributionHowTo!: string;
+  public challegeImgUrl!: string;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -89,6 +92,10 @@ class Event
         },
         communityContributionHowTo: {
           type: new DataTypes.STRING(128),
+        },
+        challegeImgUrl: {
+          type: new DataTypes.STRING(128),
+          allowNull: false,
         },
       },
       {
