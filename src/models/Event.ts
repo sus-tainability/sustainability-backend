@@ -11,6 +11,8 @@ export interface EventAttributes {
   reward: number;
   requiredAssets: number;
   imageUrl: string;
+  personalContributionHowTo: string;
+  communityContributionHowTo: string;
   challegeImgUrl: string;
 }
 
@@ -29,6 +31,8 @@ class Event
   public reward!: number;
   public requiredAssets!: number;
   public imageUrl!: string;
+  public personalContributionHowTo!: string;
+  public communityContributionHowTo!: string;
   public challegeImgUrl!: string;
 
   // timestamps!
@@ -81,6 +85,12 @@ class Event
         imageUrl: {
           type: new DataTypes.STRING(128),
           allowNull: false,
+        },
+        personalContributionHowTo: {
+          type: new DataTypes.STRING(128),
+        },
+        communityContributionHowTo: {
+          type: new DataTypes.STRING(128),
         },
         challegeImgUrl: {
           type: new DataTypes.STRING(128),

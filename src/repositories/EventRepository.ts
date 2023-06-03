@@ -69,6 +69,8 @@ export type FullEvent =
       challegeImgUrl: string;
       createdAt: Date;
       updatedAt: Date;
+      personalContributionHowTo: string;
+      communityContributionHowTo: string;
       attempts: {
         attemptId: number;
         eventId: number;

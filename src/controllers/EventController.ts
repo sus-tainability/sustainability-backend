@@ -232,6 +232,8 @@ export default class UserController {
         requiredAssets: event.requiredAssets,
         imageUrl: event.imageUrl,
         activeParticipants: event.attempts.length,
+        personalContributionHowTo: event.personalContributionHowTo,
+        communityContributionHowTo: event.communityContributionHowTo,
         createdAt: event.createdAt,
         updatedAt: event.updatedAt,
         attempt,
