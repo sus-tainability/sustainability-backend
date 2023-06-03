@@ -11,7 +11,6 @@ export interface EventAttributes {
   reward: number;
   requiredAssets: number;
   imageUrl: string;
-  enhancement/add-event-information-fields
   personalContributionHowTo: string;
   communityContributionHowTo: string;
   challegeImgUrl: string;
