@@ -67,6 +67,8 @@ export type FullEvent =
       imageUrl: string;
       createdAt: Date;
       updatedAt: Date;
+      personalContributionHowTo: string;
+      communityContributionHowTo: string;
       attempts: {
         attemptId: number;
         eventId: number;

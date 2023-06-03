@@ -11,6 +11,8 @@ export interface EventAttributes {
   reward: number;
   requiredAssets: number;
   imageUrl: string;
+  personalContributionHowTo: string;
+  communityContributionHowTo: string;
 }
 
 export type EventCreationAttributes = Optional<EventAttributes, 'id'>;
@@ -28,6 +30,8 @@ class Event
   public reward!: number;
   public requiredAssets!: number;
   public imageUrl!: string;
+  public personalContributionHowTo!: string;
+  public communityContributionHowTo!: string;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -79,6 +83,12 @@ class Event
         imageUrl: {
           type: new DataTypes.STRING(128),
           allowNull: false,
+        },
+        personalContributionHowTo: {
+          type: new DataTypes.STRING(128),
+        },
+        communityContributionHowTo: {
+          type: new DataTypes.STRING(128),
         },
       },
       {
