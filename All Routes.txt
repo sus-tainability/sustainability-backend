@@ -1,0 +1,72 @@
+----------------------------------------------------------------------------
+
+/signin ✅
+  --> for testing purposes. All signing should be made on google sso. 
+
+----------------------------------------------------------------------------
+
+/users/getSelf ✅
+  --> returns email, id, total carbon saved, total current points
+
+----------------------------------------------------------------------------
+
+/events/:id ✅
+  --> returns an event and any associated attempts 
+  --> associated attempts will include assets
+  --> assets will include whether they are currently validated or not validated
+  --> for each event show the number of active participants
+  --> for each attempt it'll also show whether the attempt has been completed 
+
+/events/current ✅
+  --> same as /events/:id
+  --> returns the current event taking place in the story
+  --> returns null if it's still being voted on
+  --> when an event starts the winning current event is automatically calculated from the votes
+
+/events/next ✅
+  --> returns the next 2 events that'll take place
+  --> null if no next events are available
+  --> if you already voted lets you know which you voted for
+
+----------------------------------------------------------------------------
+
+/assets/images/new ✅
+  --> creates new image asset, uploads it to google cloud
+  --> returns image url
+
+/assets/images/pending ✅
+  --> returns a list of assets that require validation
+  --> you are able to validate images from different events
+    --> prevents the possibility that stops ur images from being validated from an unpopular event
+  --> percentage completion is shown so that FE can see which assets are the furthest from being validated
+
+/assets/images/validate ✅
+  --> validates an image
+
+/assets/image/reject ✅
+  --> rejects an image
+
+----------------------------------------------------------------------------
+
+/story/current ✅
+  --> returns the current active story
+  --> for GSC, it'll only be story with id of 1
+  --> will include all associated planned events
+ 
+----------------------------------------------------------------------------
+
+/attempt/new ✅
+  --> creates new Attempt
+  --> for each event each user can only have 1 attempt
+
+----------------------------------------------------------------------------
+
+/vote/new ✅
+  --> votes for a particular chosen event
+
+
+
+
+
+
+ 
