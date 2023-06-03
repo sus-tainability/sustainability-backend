@@ -8,6 +8,7 @@ export interface PartOfAttributes {
   name: string;
   description: string;
   startDate: string;
+  voteImgUrl: string;
 }
 
 export type PartOfCreationAttributes = PartOfAttributes;
@@ -22,6 +23,7 @@ class PartOf
   public name!: string;
   public description!: string;
   public startDate!: string;
+  public voteImgUrl!: string;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -61,6 +63,10 @@ class PartOf
           allowNull: false,
         },
         startDate: {
+          type: new DataTypes.STRING(128),
+          allowNull: false,
+        },
+        voteImgUrl: {
           type: new DataTypes.STRING(128),
           allowNull: false,
         },

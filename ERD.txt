@@ -1,0 +1,23 @@
+[user]();
+[event]();
+[<attempts>]();
+<has>();
+
+[assets]();
+<belongs>();
+[image]();
+<part_of>();
+[story]();
+
+user --- attempts;
+event --- attempts;
+
+attempts --- has;
+assets ==> has;
+
+assets ==> {image};
+assets ==> belongs;
+event --- belongs;
+
+event --> part_of;
+story === part_of;
